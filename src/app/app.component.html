@@ -1,0 +1,6 @@
+<label class="input_form">日本語:
+  <input #taskName placeholder="日本語を入力"/>
+</label>
+<button (click)="registerPhrase(taskName.value)" class="btn btn-primary">追加</button>
+<br>
+中国語:{{this.result}}
