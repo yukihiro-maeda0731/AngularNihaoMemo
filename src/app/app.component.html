@@ -1,6 +1,35 @@
-<label class="input_form">日本語:
-  <input #taskName placeholder="日本語を入力"/>
-</label>
-<button (click)="registerPhrase(taskName.value)" class="btn btn-primary">追加</button>
-<br>
-中国語:{{this.result}}
+<!-- <div class="container">
+  <div class="col"> -->
+
+<div class="mx-auto" style="width: 200px;">
+  <label class="input_form">
+    <input #inputJapanese placeholder="日本語を入力して下さい"/>
+  </label>
+</div>
+
+<!-- <div class="mx-auto" style="width: 200px;">
+  <button (click)="registerMemo(taskName.value)" class="btn btn-success">登録</button>
+</div> -->
+
+<div class="row justify-content-center">
+  <button (click)="registerMemo(inputJapanese.value)" type="submit" class="btn btn-primary">登録</button>
+</div>
+
+
+    <br>
+    <div *ngFor="let memo of memos">
+      <div class="card bg-warning">
+        <div class="card-body mx-auto">
+          {{memo.japanese}}
+          <br>
+          {{memo.targetLang}}
+          <br>
+          <div class="row justify-content-center">
+            <button (click)="deleteMemo(memo)" type="submit" class="delete btn btn-danger">削除</button>
+          </div>          
+        </div>
+      </div>
+      <br>
+    </div>
+    
+

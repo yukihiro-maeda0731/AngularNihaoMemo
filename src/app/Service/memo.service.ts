@@ -2,27 +2,33 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { Memo } from '../model/memo';
 
 const springURL: string = environment.springURL;
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class MemoService {
 
   constructor(private http: HttpClient) { }
 
-
-  transferImg(translatedPhrase: String): Observable<any> {
-    return this.http.post(springURL, translatedPhrase,{
+  registerMemo(memo: Memo): Observable<any> {
+    return this.http.post(springURL, memo,{
       headers: {
-        "Content-Type": "text/plain; charset=UTF-8",
-        //CORS対策
+        "Content-Type": "application/json",
         "Access-Control-Allow-Headers": "*",
         "Access-Control-Allow-Origin": "*"
-      },
-      //jsonではなく文字列で結果が欲しいので追記(なくても落ちはしないが余分なエラーメッセージ出る)
-      'responseType': 'text'
+      }
     })
   }
+
+  getMemos(): Observable<any> {
+    return this.http.get(springURL);
+  }
+
+  deleteMemo(id: number): Observable<any> {
+    return this.http.delete(`${springURL}/${id}`)
+  }
+
 }
