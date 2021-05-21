@@ -1,35 +1,41 @@
-<!-- <div class="container">
-  <div class="col"> -->
-
 <div class="mx-auto" style="width: 200px;">
   <label class="input_form">
-    <input #inputJapanese placeholder="日本語を入力して下さい"/>
+    <input
+      type="text"
+      name="input_japanese"
+      [(ngModel)]="inputJP"
+      #inputJPinfo="ngModel"
+      required
+      maxlength="{{maxInputJapaneseLength}}"
+      placeholder="日本語を入力して下さい"/>
   </label>
 </div>
-
-<!-- <div class="mx-auto" style="width: 200px;">
-  <button (click)="registerMemo(taskName.value)" class="btn btn-success">登録</button>
-</div> -->
-
-<div class="row justify-content-center">
-  <button (click)="registerMemo(inputJapanese.value)" type="submit" class="btn btn-primary">登録</button>
+<div class="alert alert-danger row justify-content-center" role="alert" *ngIf="inputJPinfo.errors && (inputJPinfo.dirty || inputJPinfo.touched)">
+  <div [hidden]="!inputJPinfo.errors.required">
+    ※ 日本語が未入力です
+  </div>
+  <div [hidden]="!inputJPinfo.errors.maxlength">
+    ※ 入力した日本語が長すぎます
+  </div>
 </div>
 
+<div class="row justify-content-center">
+  <button (click)="registerMemo()" class="btn btn-primary">登録</button>
+</div>
 
-    <br>
-    <div *ngFor="let memo of memos">
-      <div class="card bg-warning">
-        <div class="card-body mx-auto">
-          {{memo.japanese}}
-          <br>
-          {{memo.targetLang}}
-          <br>
-          <div class="row justify-content-center">
-            <button (click)="deleteMemo(memo)" type="submit" class="delete btn btn-danger">削除</button>
-          </div>          
-        </div>
-      </div>
+<br>
+<div *ngFor="let memo of memos">
+  <div class="card bg-warning">
+    <div class="card-body mx-auto">
+      {{memo.japanese}}
       <br>
+      {{memo.targetLang}}
+      <br>
+      <div class="row justify-content-center">
+        <button (click)="deleteMemo(memo)" type="submit" class="delete btn btn-danger">削除</button>
+      </div>          
     </div>
+  </div>
+  <br>
+</div>
     
-

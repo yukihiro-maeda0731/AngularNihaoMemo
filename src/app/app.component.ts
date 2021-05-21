@@ -8,6 +8,11 @@ import { MemoService } from './Service/memo.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  //validation
+  public inputJP: string = '';
+  public readonly maxInputJapaneseLength: number = 30;
+
   constructor(private service: MemoService){}
 
   ngOnInit(): void {
@@ -19,8 +24,8 @@ export class AppComponent {
     japanese: '',
   };
 
-  registerMemo(inputJapanese: string){
-    this.memo.japanese = inputJapanese;
+  registerMemo(){
+    this.memo.japanese = this.inputJP;
     this.service.registerMemo(this.memo)
     .subscribe();
     alert('登録しました');
