@@ -1,27 +1,31 @@
-<div class="mx-auto" style="width: 200px;">
-  <label class="input_form">
-    <input
-      type="text"
-      name="input_japanese"
-      [(ngModel)]="inputJP"
-      #inputJPinfo="ngModel"
-      required
-      maxlength="{{maxInputJapaneseLength}}"
-      placeholder="日本語を入力して下さい"/>
-  </label>
-</div>
-<div class="alert alert-danger row justify-content-center" role="alert" *ngIf="inputJPinfo.errors && (inputJPinfo.dirty || inputJPinfo.touched)">
-  <div [hidden]="!inputJPinfo.errors.required">
-    ※ 日本語が未入力です
-  </div>
-  <div [hidden]="!inputJPinfo.errors.maxlength">
-    ※ 入力した日本語が長すぎます
-  </div>
-</div>
+<form #formCheck="ngForm">
 
-<div class="row justify-content-center">
-  <button (click)="registerMemo()" class="btn btn-primary">登録</button>
-</div>
+  <div class="mx-auto" style="width: 200px;">
+    <label class="input_form">
+      <input
+        type="text"
+        name="input_japanese"
+        [(ngModel)]="inputJP"
+        #inputJPinfo="ngModel"
+        required
+        maxlength="{{maxInputJapaneseLength}}"
+        placeholder="日本語を入力して下さい"/>
+    </label>
+  </div>
+  <div class="alert alert-danger row justify-content-center" role="alert" *ngIf="inputJPinfo.errors && (inputJPinfo.dirty || inputJPinfo.touched)">
+    <div [hidden]="!inputJPinfo.errors.required">
+      ※ 日本語が未入力です
+    </div>
+    <div [hidden]="!inputJPinfo.errors.maxlength">
+      ※ 入力した日本語が長すぎます
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <button (click)="registerMemo()" class="btn btn-primary" [disabled]="formCheck.invalid">登録</button>
+  </div>
+
+</form>
 
 <br>
 <div *ngFor="let memo of memos">
