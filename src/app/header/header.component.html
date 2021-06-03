@@ -1,6 +1,13 @@
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
-      <h5 class="text-white h4">おしらせ</h5>
+      <!-- <a style="text-decoration: none" [routerLink]="['/home']" (click)="showHome()"> -->
+      <a style="text-decoration: none" [routerLink]="['']" (click)="showHome()">
+        <h5 class="text-white h4">トップページへ</h5>
+      </a>
+      <br>
+      <a style="text-decoration: none" [routerLink]="['/notification']" (click)="showNotification()">
+        <h5 class="text-white h4">お知らせ</h5>
+      </a>
       <br>
       <h5 class="text-white h4">ログアウト</h5>
     </div>

@@ -1,6 +1,5 @@
-import { Component, SystemJsNgModuleLoader } from '@angular/core';
-import { Memo } from './model/memo';
-import { MemoService } from './Service/memo.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,40 +8,10 @@ import { MemoService } from './Service/memo.service';
 })
 export class AppComponent {
 
-  //validation
-  public inputJP: string = '';
-  public readonly maxInputJapaneseLength: number = 30;
-
-  constructor(private service: MemoService){}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.getMemos();
+    // this.router.navigate(['/home']);
+    this.router.navigate(['']);
   }
-
-  memos: Memo[];
-  memo: Memo = {
-    japanese: '',
-  };
-
-  registerMemo(){
-    this.memo.japanese = this.inputJP;
-    this.service.registerMemo(this.memo)
-    .subscribe();
-    alert('登録しました');
-    this.getMemos();
-  }
-
-  getMemos() {
-    this.service.getMemos().subscribe(data => {
-      this.memos = data;
-    });
-  }
-
-  deleteMemo(memo: Memo) {
-    this.service.deleteMemo(memo.id).subscribe();
-    console.log(memo.id);
-    alert('消しました');
-    this.getMemos();
-  }
-
 }
