@@ -13,16 +13,20 @@ export class HomeComponent implements OnInit {
   public inputJP: string = '';
   public readonly maxInputJapaneseLength: number = 30;
 
+  memos: Memo[];
+  memo: Memo = {
+    japanese: '',
+  };
+
+  japaneseFlg: boolean = true;
+  chineseFlg: boolean = true;
+
   constructor(private service: MemoService){}
 
   ngOnInit(): void {
     this.getMemos();
   }
 
-  memos: Memo[];
-  memo: Memo = {
-    japanese: '',
-  };
 
   registerMemo(){
     this.memo.japanese = this.inputJP;
@@ -38,12 +42,27 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  switchJapaneseDisplay() {
+    if (this.japaneseFlg === true) {
+      this.japaneseFlg = false;
+    } else {
+      this.japaneseFlg = true;
+    }
+  }
+
+  switchChineseDisplay() {
+    if (this.chineseFlg === true) {
+      this.chineseFlg = false;
+    } else {
+      this.chineseFlg = true;
+    }
+  }
+
   deleteMemo(memo: Memo) {
     this.service.deleteMemo(memo.id).subscribe();
     console.log(memo.id);
     alert('消しました');
     this.getMemos();
   }
-
 
 }

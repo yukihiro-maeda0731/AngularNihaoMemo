@@ -1,46 +1,64 @@
 <form #formCheck="ngForm">
+  <div class="card bg-light">
+    <div class="card-body mx-auto">
+      
+      <div class="mx-auto" style="width: 200px">
+        <label class="input_form">
+          <input
+            type="text"
+            name="input_japanese"
+            [(ngModel)]="inputJP"
+            #inputJPinfo="ngModel"
+            required
+            maxlength="{{maxInputJapaneseLength}}"
+            placeholder="日本語を入力して下さい"/>
+        </label>
+      </div>
+      <div class="alert alert-danger row justify-content-center" role="alert" *ngIf="inputJPinfo.errors && (inputJPinfo.dirty || inputJPinfo.touched)">
+        <div [hidden]="!inputJPinfo.errors.required">
+          ※ 日本語が未入力です
+        </div>
+        <div [hidden]="!inputJPinfo.errors.maxlength">
+          ※ 入力した日本語が長すぎます
+        </div>
+      </div>
+      <br>
 
-    <div class="mx-auto" style="width: 200px">
-      <label class="input_form">
-        <input
-          type="text"
-          name="input_japanese"
-          [(ngModel)]="inputJP"
-          #inputJPinfo="ngModel"
-          required
-          maxlength="{{maxInputJapaneseLength}}"
-          placeholder="日本語を入力して下さい"/>
-      </label>
-    </div>
-    <div class="alert alert-danger row justify-content-center" role="alert" *ngIf="inputJPinfo.errors && (inputJPinfo.dirty || inputJPinfo.touched)">
-      <div [hidden]="!inputJPinfo.errors.required">
-        ※ 日本語が未入力です
+      <div class="row justify-content-center">
+        <button (click)="registerMemo()" class="btn btn-primary" style="width: 100px" [disabled]="formCheck.invalid">登録</button>
       </div>
-      <div [hidden]="!inputJPinfo.errors.maxlength">
-        ※ 入力した日本語が長すぎます
-      </div>
-    </div>
-    <br>
 
-    <div class="row justify-content-center">
-      <button (click)="registerMemo()" class="btn btn-primary" style="width: 100px" [disabled]="formCheck.invalid">登録</button>
-    </div>
-  
-  </form>
-  
-  <br>
-  <div *ngFor="let memo of memos">
-    <div class="card bg-warning">
-      <div class="card-body mx-auto">
-        {{memo.japanese}}
-        <br>
-        {{memo.targetLang}}
-        <br>
-        <div class="row justify-content-center">
-          <button (click)="deleteMemo(memo)" type="submit" class="delete btn btn-danger" style="width: 100px">削除</button>
-        </div>          
+      <div class="form-check form-check-inline">
+        <input id="switchJapaneseCheckbox" class="form-check-input" (change)="switchJapaneseDisplay()" type="checkbox" data-toggle="toggle" checked>
+        <label for="switchJapaneseCheckbox" class="form-check-label">日本語表示切替</label>
       </div>
+
+      <div class="form-check form-check-inline">
+        <input id="switchChineseCheckbox" class="form-check-input" (change)="switchChineseDisplay()" type="checkbox" data-toggle="toggle" checked>
+        <label for="switchChineseCheckbox" class="form-check-label">中国語表示切替</label>
+      </div>
+
     </div>
-    <br>
   </div>
+</form>
+  
+<br>
+<div *ngFor="let memo of memos">
+  <div class="card bg-warning">
+    <div class="card-body mx-auto">
+      <div [hidden]=!japaneseFlg>
+        {{memo.japanese}}
+      </div>
+      <br>
+      <div [hidden]=!chineseFlg>
+        {{memo.targetLang}}
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <button (click)="deleteMemo(memo)" type="submit" class="delete btn btn-danger" style="width: 100px">削除</button>
+      </div>          
+    </div>
+  </div>
+  <br>
+</div>
       

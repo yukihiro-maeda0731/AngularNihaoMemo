@@ -4,10 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'home'
-  // },
   {
     path: '',
     component: HomeComponent
@@ -15,11 +11,7 @@ const routes: Routes = [
   {
     path: 'notification',
     component: NotificationComponent
-  },
-  // {
-  //   path: '**',
-  //   component: HomeComponent
-  // }
+  }
 ];
 
 @NgModule({
