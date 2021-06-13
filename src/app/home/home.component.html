@@ -60,5 +60,15 @@
     </div>
   </div>
   <br>
+
 </div>
-      
+
+<br>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" (click)="prevMemo()">前へ</a></li>
+    <li *ngFor="let in of pageCounter(totalPages) ; let i = index" class="page-item"><a class="page-link" (click)="clickPage(i)">{{i}}</a></li>
+    <li class="page-item"><a class="page-link" (click)="nextMemo()">次へ</a></li>
+  </ul>
+</nav>
+

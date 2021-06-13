@@ -13,6 +13,9 @@ export class MemoService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * メモ登録。
+   */
   registerMemo(memo: Memo): Observable<any> {
     return this.http.post(springURL, memo,{
       headers: {
@@ -23,10 +26,16 @@ export class MemoService {
     })
   }
 
-  getMemos(): Observable<any> {
-    return this.http.get(springURL);
+  /**
+   * メモ取得。
+   */
+  getMemos(page: number): Observable<any> {
+    return this.http.get(`${springURL}/${page}`);
   }
 
+  /**
+   * メモ削除。
+   */
   deleteMemo(id: number): Observable<any> {
     return this.http.delete(`${springURL}/${id}`)
   }
